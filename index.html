@@ -11,26 +11,26 @@
 </div>
 <input type="file" id="files" name="files[]" multiple />
 <output id="list"></output>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-    div class: <input type="text" id="d-class">
-    </div>
-    <div class="col-md-6">
-    div id: <input type="text" id="d-id">
-    </div>
-    <div class="col-md-6">
-    table class: <input type="text" id="t-class">
-    </div>
-    <div class="col-md-6">
-    table id: <input type="text" id="t-id">
+<div class="container-fluid>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+      div class: <input type="text" id="d-class">
+      </div>
+      <div class="col-md-6">
+      div id: <input type="text" id="d-id">
+      </div>
+      <div class="col-md-6">
+      table class: <input type="text" id="t-class">
+      </div>
+      <div class="col-md-6">
+      table id: <input type="text" id="t-id">
+      </div>
     </div>
   </div>
+
+  <button class="btn btn-success btn-sm">Convert</button>
 </div>
-
-<button class="btn btn-success btn-sm">Convert</button>
-
 <script>
   function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
