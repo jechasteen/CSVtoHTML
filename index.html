@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CSV to HTML Tables</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="text/css" type="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page-header">
+  <h1>CSV to HTML <small>quickly create tables in batches</small></h1>
+</div>
+<input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    div class: <input type="text" id="d-class">
+    </div>
+    <div class="col-md-6">
+    div id: <input type="text" id="d-id">
+    </div>
+    <div class="col-md-6">
+    table class: <input type="text" id="t-class">
+    </div>
+    <div class="col-md-6">
+    table id: <input type="text" id="t-id">
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-success btn-sm">Convert</button>
+
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                  '</li>');
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
