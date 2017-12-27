@@ -1,0 +1,65 @@
+/*tags*/
+body {
+	font-family: 'Merriweather Sans', sans-serif;
+	background-color: #FFF8E7;
+}
+
+h1 {
+	font-family: 'Oswald', sans-serif;
+	border-top: 8px solid blue;
+	border-bottom: 1px solid black;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+
+h2{
+	font-family: 'Oswald', sans-serif;
+	padding-top: 30px;
+	padding-bottom: 25px;
+	border-bottom: 2px solid black;
+	margin-bottom: 15px;
+}
+
+li {
+	padding-bottom: 15px;
+	background-color: pink;
+}
+
+textarea {
+	font-family: 'Inconsolata', monospace;
+	line-height: 1;
+}
+
+td {
+	border: 1px solid black;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/*classes*/
+.btn-primary {
+	border-radius: 0;
+	padding: 2px;
+	margin: 2px;
+}
+
+.code {
+	font-family: 'Inconsolata', monospace;
+}
+
+.data-box {
+	padding-top: 30px;
+}
+
+.form-group {
+	width: 50%;
+}
+
+.row {
+	padding-top: 15px;
+}
+/*ids*/
+
+font-family: 'Oswald', sans-serif;
+font-family: 'Merriweather Sans', sans-serif;
+font-family: 'Inconsolata', monospace;

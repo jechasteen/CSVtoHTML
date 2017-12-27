@@ -2,53 +2,78 @@
 <html>
 <head>
   <title>CSV to HTML Tables</title>
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Merriweather+Sans:300|Oswald" rel="stylesheet">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="text/css" type="stylesheet" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
+
 <body>
-<div class="page-header">
-  <h1>CSV to HTML <small>quickly create tables in batches</small></h1>
-</div>
-<input type="file" id="files" name="files[]" multiple />
-<output id="list"></output>
-<div class="container-fluid>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-      div class: <input type="text" id="d-class">
-      </div>
-      <div class="col-md-6">
-      div id: <input type="text" id="d-id">
-      </div>
-      <div class="col-md-6">
-      table class: <input type="text" id="t-class">
-      </div>
-      <div class="col-md-6">
-      table id: <input type="text" id="t-id">
+  <div class="container-fluid">
+    <div class="page-header">
+      <h1>CSV to HTML <small>create tables in batches</small></h1>
+    </div>
+    <div class="container"
+      <ul class="list-group instructions">
+        <li class="list-group-item">Mess around with the javascript to generate custom tables. The html tags are coded into variables. Alter them to suit your needs.</li>
+        <li class="list-group-item">To create your own copy, fork this one on <a href="http://github.com/jechasteen/CSVtoHTML">GitHub</a>, then head into script.js and make changes to the variables. </li>
+        <li class="list-group-item">To host on GitHub: go to the repository page, click settings, scroll down to GitHub Pages and enable the master branch. Yours will be available under: <span class="code">[username].github.io/CSVtoHTML</span></li>
+        <li class="list-group-item">These variables could totally have been a dictionary, but I wrote them as I needed them and now there are a lot. I intend to do this refactoring in the future, as well a system for adding classes and ids to tags.</li>
+        <li class="list-group-item">simply refresh the page to start over</li>
+        <li class="list-group-item">Choose multiple files below:</li>
+      </ul>
+    </div>
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <input class="btn btn-link" type="file" id="files" name="files[]" onchange="onChange(event)" multiple />
+          <output id="list"></output>
+        </div>
+        <div class="col-sm-6">
+          <button class="btn btn-success btn-sm" onclick="handleClick()">Convert</button>
+        </div>
       </div>
     </div>
+
+    <hr>
+
+    <div class="container" id="preview">
+      <h4>These currently have no effect</h4>
+      <!--Hidden -->
+      <form class="hidden">
+        <div class="form-group">
+          <label class="hidden" for="div-class">Div class: </label>
+          <input type="email" class="form-control" id="div-class" placeholder="div class">
+        </div>
+        <div class="form-group">
+          <label class="hidden" for="div-class">Div id: </label>
+          <input type="email" class="form-control" id="div-id" placeholder="div id">
+        </div>
+        <div class="form-group">
+          <label class="hidden" for="tab-class">Table class: </label>
+          <input type="email" class="form-control" id="tab-class" placeholder="table class">
+        </div>
+        <div class="form-group">
+          <label class="hidden" for="tab-class">Table id: </label>
+          <input type="email" class="form-control" id="tab-id" placeholder="table id">
+        </div>
+      </form>
+      <!-- END Hidden -->
+    </div>
+
   </div>
-
-  <button class="btn btn-success btn-sm">Convert</button>
+  <!--
+  <div class="container data-box">
+    <div class="container-fluid" id="preview">
+    </div>
+  </div>-->
 </div>
-<script>
-  function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
 
-    // files is a FileList of File objects. List some properties.
-    var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                  f.size, ' bytes, last modified: ',
-                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                  '</li>');
-    }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-  }
+<script type="text/javascript" src="script.js"></script>
 
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-</script>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>
