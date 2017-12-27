@@ -1,7 +1,7 @@
 # CSVtoHTML
 #### Convert a batch of CSV files to HTML tables, with any number of columns and rows.
 ## How To Use This Tool
-Navigate to <jechasteen.github.io/CSVtoHTML>
+Navigate to jechasteen.github.io/CSVtoHTML
 Select some CSV files to convert.
 Click the convert button and scroll down to view results.
 ## How To Modify This Tool
