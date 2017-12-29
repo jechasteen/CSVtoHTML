@@ -22,7 +22,6 @@ h2{
 
 li {
 	padding-bottom: 15px;
-	background-color: pink;
 }
 
 textarea {
@@ -47,12 +46,18 @@ td {
 	font-family: 'Inconsolata', monospace;
 }
 
-.container {
-	width: 100%;
+.convert {
+	margin-top: 5px;
+	margin-left: 13px;
 }
 
 .data-box {
 	padding-top: 30px;
+}
+
+.files {
+	width: 100%;
+	padding-left: 0;
 }
 
 .form-group {
@@ -60,7 +65,9 @@ td {
 }
 
 .row {
+	width: 86%;
 	padding-top: 15px;
+	padding-left: 7%;
 }
 /*ids*/
 

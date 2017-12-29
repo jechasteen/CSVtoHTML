@@ -31,7 +31,7 @@ function handleFileSelect(evt) {
     // files is a FileList of File objects. List some properties.
     var output = [];
     for (var i = 0, f; f = files[i]; i++) {
-      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+      output.push('<li class="list-group-item"><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
                   f.size, ' bytes, last modified: ',
                   f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
                   '</li>');
@@ -74,7 +74,6 @@ function parseCSV(csv){
       linestart = false;
     }
     if (csv[i] === "\n") {
-      console.log("reached");
       output += h.td_c + h.tr_c;
       linestart = true;
     } else if (csv[i] === ','){
@@ -103,7 +102,7 @@ function convertAll(){
 // end array conversion
 
 // function for onclick
-function handleClick(){
+$( "#convert" ).on("click", function(){
   if (fs === undefined){
     alert("Choose at least one .csv file");
     return;
@@ -116,9 +115,9 @@ function handleClick(){
     h_total += h.headline_o + fs[i].name + h.headline_c + h.preview_textarea_o + i + h.preview_textarea_c + h.preview + h_result[i];
   }
   
-  document.getElementById("preview").innerHTML = h_total;
+  $( "#preview" ).html(h_total);
+  // document.getElementById("preview").innerHTML = h_total;
   for (var i = 0; i < h_result.length; i++){
-    document.getElementById(h.preview_ids[i]).value = h_result[i];
+    $( "#" + h.preview_ids[i] ).html( h_result[i] );
   }
-}
-// end handleClick
+})

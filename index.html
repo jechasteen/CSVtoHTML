@@ -15,7 +15,7 @@
     <div class="page-header">
       <h1>CSV to HTML <small>create tables in batches</small></h1>
     </div>
-    <div class="container"
+    <div class="container">
       <ul class="list-group instructions">
         <li class="list-group-item">Mess around with the javascript to generate custom tables. The html tags are coded into variables. Alter them to suit your needs.</li>
         <li class="list-group-item">To create your own copy, fork this one on <a href="http://github.com/jechasteen/CSVtoHTML">GitHub</a>, then head into script.js and make changes to the variables. </li>
@@ -30,10 +30,17 @@
       <div class="row">
         <div class="col-sm-6">
           <input class="btn btn-link" type="file" id="files" name="files[]" onchange="onChange(event)" multiple />
-          <output id="list"></output>
         </div>
         <div class="col-sm-6">
-          <button class="btn btn-success btn-sm" onclick="handleClick()">Convert</button>
+          <button class="btn btn-success convert" id="convert">Convert</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 col-sm-12"></div>
+        <div class="col-md-10 col-sm-12">
+          <ul class="list-group files">
+            <output id="list"></output>
+          </ul>
         </div>
       </div>
     </div>
@@ -72,9 +79,8 @@
   </div>-->
 </div>
 
-<script type="text/javascript" src="script.js"></script>
-
 <script type="text/javascript" src="jquery-3.2.1.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
