@@ -12,7 +12,7 @@ var h = {
   headline_c: "</h2>",
   preview: '<h4>Preview</h4>',
   preview_textarea_o: '<textarea rows="4" cols="80" id=\"id',
-  preview_textarea_c: '\"></textarea>',
+  preview_textarea_c: '\"></textarea><button class=\"btn btn-sucess copy-to-clipboard\">Copy</button>',
   preview_ids: ["id0","id1","id2","id3","id4","id5","id6","id7","id8","id9","id10",
                 "id11","id12","id13","id14","id15","id16","id17","id18","id19",
                 "id20","id21","id22","id23","id24","id25","id26","id27","id28","id29",
@@ -23,27 +23,41 @@ var h = {
 // container for data
 var contents = [];
 var fs;
+// bool if files selected
+var filesListPopulated = false;
 
-//handle the multi-file selector box
-function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
+$( "#files" ).on("change", function(evt){
+  var files = evt.target.files; // FileList object
 
-    // files is a FileList of File objects. List some properties.
-    var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-      output.push('<li class="list-group-item"><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                  f.size, ' bytes, last modified: ',
-                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                  '</li>');
-    }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-    fs = files;
+  // files is a FileList of File objects. List some properties.
+  var output = [];
+  for (var i = 0, f; f = files[i]; i++) {
+    output.push('<li class="list-group-item"><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                f.size, ' bytes, last modified: ',
+                f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                '</li>');
   }
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+  $( "#list" ).html( '<ul>' + output.join('') + '</ul>' );
+  filesListPopulated = true;
+  fs = files;
+  console.log(files);
+})
 // End handleFileSelect
 
 // load the selected files in to memory at var contents
 function onChange(event){
+  if (filesListPopulated){
+    contents = [];
+    fs = undefined;
+    filesListPopulated = false;
+    readFile(event);
+  } else {
+    readFile(event); 
+  }
+}
+
+function readFile(event){
   var temp = event.target.files;
   for(var i = 0; i < temp.length; i++){
     var file = event.target.files[i];
@@ -120,4 +134,30 @@ $( "#convert" ).on("click", function(){
   for (var i = 0; i < h_result.length; i++){
     $( "#" + h.preview_ids[i] ).html( h_result[i] );
   }
-})
+
+  $( ".copy-to-clipboard" ).on("click", function(){
+    var copy = $( this ).prev("textarea").text();
+    console.log(copy);
+    try {
+      var successful = document.execCommand('copy', copy);
+      var msg = successful ? 'successful' : 'unsuccessful';
+      console.log('Copying text command was ' + msg);
+    } catch (err) {
+      console.log('Oops, unable to copy');
+    }
+  });
+
+});
+
+var $instr = $( ".instructions" );
+
+var $hide_show = $( ".hide-instr" );
+$( $hide_show ).on("click", function(){
+  if($instr.css("display") === "none"){
+    $instr.css("display", "inline-block");
+    $hide_show.text("Hide Instructions");
+  } else if ($instr.css("display") === "inline-block") {
+    $instr.css("display", "none");
+    $hide_show.text("Show Instructions");
+  }
+});

@@ -64,11 +64,11 @@
 	],
 	"file_history":
 	[
+		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/script.js",
+		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/index.html",
 		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/csvgen.css",
 		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/csvgen.html",
 		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/csvgen.js",
-		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/script.js",
-		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/index.html",
 		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/style.css",
 		"/C/Users/jonat/Documents/GitHub/CSVtoHTML/test.csv",
 		"/C/Users/jonat/Documents/GitHub/skidstack.github.io/listgen.html",
@@ -137,7 +137,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -174,7 +174,7 @@
 	"project": "csvtohtml.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -208,11 +208,11 @@
 	"settings":
 	{
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 209.0,
+	"side_bar_width": 135.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

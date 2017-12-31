@@ -30,14 +30,21 @@ textarea {
 }
 
 td {
-	border: 1px solid black;
+	border: 1px solid #444;
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
+td:nth-of-type(1){
+	border-top: 0;
+	border-left: 0;
+	border-bottom: 0;
+}
+
 /*classes*/
+
 .btn-primary {
-	border-radius: 0;
+	border-radius: 5px;
 	padding: 2px;
 	margin: 1px;
 }
@@ -64,6 +71,16 @@ td {
 	width: 50%;
 }
 
+.hide-instr {
+	border: 1px solid #aaa;
+	border-radius: 0;
+}
+
+.instructions {
+	display: none;
+	transition: 0.5s linear;
+}
+
 .row {
 	width: 86%;
 	padding-top: 15px;
@@ -71,6 +88,6 @@ td {
 }
 /*ids*/
 
-font-family: 'Oswald', sans-serif;
+/*font-family: 'Oswald', sans-serif;
 font-family: 'Merriweather Sans', sans-serif;
-font-family: 'Inconsolata', monospace;
+font-family: 'Inconsolata', monospace;*/
