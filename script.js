@@ -23,29 +23,83 @@ var h = {
 // container for data
 var contents = [];
 var fs;
+
 // bool if files selected
 var filesListPopulated = false;
+/*
+ /  event handlers
+ */
+// Show / Hide Instructions
+var instr = $( ".instructions" );
+var hide_show = $( ".hide-instr" );
+$( hide_show ).on("click", function(){
+  if(instr.css("display") === "none"){
+    instr.css("display", "inline-block");
+    hide_show.text("Hide Instructions");
+  } else if (instr.css("display") === "inline-block") {
+    instr.css("display", "none");
+    hide_show.text("Show Instructions");
+  }
+});
 
+ // Checks for changes to file selection
 $( "#files" ).on("change", function(evt){
   var files = evt.target.files; // FileList object
-
-  // files is a FileList of File objects. List some properties.
   var output = [];
+
   for (var i = 0, f; f = files[i]; i++) {
-    output.push('<li class="list-group-item"><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+    // construct a string for the file list HTML
+    output.push('<li class="list-group-item"><strong>', escape(f.name), 
+                '</strong> (', f.type || 'n/a', ') - ',
                 f.size, ' bytes, last modified: ',
                 f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
                 '</li>');
   }
-
+  // Insert the file list
   $( "#list" ).html( '<ul>' + output.join('') + '</ul>' );
-  filesListPopulated = true;
-  fs = files;
+  filesListPopulated = true;  // files have been selected and populated, so if this change
+  fs = files;                 // happens again
   console.log(files);
 })
 // End handleFileSelect
 
+// event handler for convert button
+$( "#convert" ).on("click", function(){
+  if (fs === undefined){
+    alert("Choose at least one .csv file");
+    return;
+  }
+  var h_result = convertAll();
+  var h_total = "";
+  var newlines_regexp = /(\r\n|\n|\r)/gm;
+  for (var i = 0; i < h_result.length; i++){
+    h_result[i] = h_result[i].replace(newlines_regexp, "");
+    h_total += h.headline_o + fs[i].name + h.headline_c + h.preview_textarea_o + i + h.preview_textarea_c + h.preview + h_result[i];
+  }
+  
+  $( "#preview" ).html(h_total);
+  // document.getElementById("preview").innerHTML = h_total;
+  for (var i = 0; i < h_result.length; i++){
+    $( "#" + h.preview_ids[i] ).html( h_result[i] );
+  }
+
+  $( ".copy-to-clipboard" ).on("click", function(){
+    var copy = $( this ).prev("textarea").text();
+    console.log(copy);
+    try {
+      var successful = document.execCommand('copy', copy);
+      var msg = successful ? 'successful' : 'unsuccessful';
+      console.log('Copying text command was ' + msg);
+    } catch (err) {
+      console.log('Oops, unable to copy');
+    }
+  });
+});
+// end convert button handler
+
 // load the selected files in to memory at var contents
+// don't know why this works, but it does....
+// It seems to run when the previous onChange is triggered.
 function onChange(event){
   if (filesListPopulated){
     contents = [];
@@ -79,7 +133,6 @@ function parseCSV(csv){
   //open table
   output += h.table_o;
 
-  //start to parse string
   for (var i = 0; i < csv.length; i++){
     // at linestart, add tr, td, and button then
     // set linestart to false and continue
@@ -102,7 +155,7 @@ function parseCSV(csv){
 }
 //end parse
 
-// Interface for converting one array ot the other: CSV -> HTML
+// Converts full array of CSV to HTML, returns HTML array
 function convertAll(){
   var h_contents = [];
 
@@ -114,50 +167,3 @@ function convertAll(){
   return h_contents;
 }
 // end array conversion
-
-// function for onclick
-$( "#convert" ).on("click", function(){
-  if (fs === undefined){
-    alert("Choose at least one .csv file");
-    return;
-  }
-  var h_result = convertAll();
-  var h_total = "";
-  var newlines_regexp = /(\r\n|\n|\r)/gm;
-  for (var i = 0; i < h_result.length; i++){
-    h_result[i] = h_result[i].replace(newlines_regexp, "");
-    h_total += h.headline_o + fs[i].name + h.headline_c + h.preview_textarea_o + i + h.preview_textarea_c + h.preview + h_result[i];
-  }
-  
-  $( "#preview" ).html(h_total);
-  // document.getElementById("preview").innerHTML = h_total;
-  for (var i = 0; i < h_result.length; i++){
-    $( "#" + h.preview_ids[i] ).html( h_result[i] );
-  }
-
-  $( ".copy-to-clipboard" ).on("click", function(){
-    var copy = $( this ).prev("textarea").text();
-    console.log(copy);
-    try {
-      var successful = document.execCommand('copy', copy);
-      var msg = successful ? 'successful' : 'unsuccessful';
-      console.log('Copying text command was ' + msg);
-    } catch (err) {
-      console.log('Oops, unable to copy');
-    }
-  });
-
-});
-
-var $instr = $( ".instructions" );
-
-var $hide_show = $( ".hide-instr" );
-$( $hide_show ).on("click", function(){
-  if($instr.css("display") === "none"){
-    $instr.css("display", "inline-block");
-    $hide_show.text("Hide Instructions");
-  } else if ($instr.css("display") === "inline-block") {
-    $instr.css("display", "none");
-    $hide_show.text("Show Instructions");
-  }
-});
